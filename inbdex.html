@@ -1,0 +1,32 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>media player</title>
+</head>
+<body id="file_area">
+    
+</body>
+<input type="file">
+<button type="button">読み込み</button>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function(){
+        let url = new URL(window.location.href);
+        let params = url.searchParams;
+fetch(params.get('s'))
+.then(response => response.blob())
+.then(data => {
+
+    const file_area = document.getElementById('file_area');
+    const video_element = document.createElement('video');
+
+    video_element.src = URL.createObjectURL(data);
+    video_element.controls = true;
+    file_area.appendChild(video_element);
+
+});
+});
+</script>
+</html>
